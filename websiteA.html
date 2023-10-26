@@ -1,0 +1,70 @@
+<doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Microscope Image Library Project</h1>
+<Table border=1>
+<tr><td>
+<Table id="myTable">
+ <tbody></tbody>
+</Table>
+</td>
+<td>
+<div id="overlay">
+  <div id="enlargedContainer">
+    <img id="enlargedImg" src="" alt="Enlarged Image" width=550 height=550>
+  </div>
+</div>
+
+</td>
+</tr>
+</Table>
+
+
+<script>
+var table = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+var overlay = document.getElementById("overlay");
+var enlargedImg = document.getElementById("enlargedImg");
+var imageCount = 121; // Number of images you want to generate
+
+for (var i = 1; i <= imageCount; i++) {
+    var td = document.createElement("td");
+    var img = document.createElement("img");
+    img.src = "microsope_Images/IMG_" + (i < 10 ? "000" : "00") + i + ".jpg";
+    img.width=100;
+    img.height=100;
+    td.appendChild(img);
+
+    // Add <td> to the table body
+    table.appendChild(td);
+
+    // Add a new row after every 10 <td> elements
+    if (i % 10 === 0) {
+        var newRow = table.insertRow();
+    }
+}
+
+var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+var overlay = document.getElementById("overlay");
+var enlargedImg = document.getElementById("enlargedImg");
+
+table.addEventListener('click', function(event) {
+  if (event.target.tagName === 'IMG') {
+    var clickedImgSrc = event.target.src;
+    enlargedImg.src = clickedImgSrc;
+    overlay.style.display = 'flex';
+  }
+});
+
+overlay.addEventListener('click', function(event) {
+  if (event.target === overlay) {
+    overlay.style.display = 'none';
+  }
+});
+
+
+</script>
+</body>
+</html>
